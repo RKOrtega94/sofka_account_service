@@ -1,1 +1,21 @@
-spring.application.name=account
+server:
+  port: 8081
+
+spring:
+  application:
+    name: client_server
+  datasource:
+    url: jdbc:postgresql://${HOST:localhost}:${PORT:5432}/${DATABASE:account_database}
+    username: ${DB_USERNAME:postgres}
+    password: ${DB_PASSWORD:123456}
+    driver-class-name: org.postgresql.Driver
+  jpa:
+    database-platform: org.hibernate.dialect.PostgreSQLDialect
+    show-sql: true
+    hibernate:
+      ddl-auto: none
+logging:
+  level:
+    root: DEBUG
+
+
