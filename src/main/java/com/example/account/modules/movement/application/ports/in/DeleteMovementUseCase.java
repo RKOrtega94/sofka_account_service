@@ -1,4 +1,5 @@
 package com.example.account.modules.movement.application.ports.in;
 
-public class DeleteMovementUseCase {
+public interface DeleteMovementUseCase {
+    void delete(Long id);
 }

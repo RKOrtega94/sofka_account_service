@@ -1,25 +1,24 @@
 package com.example.account.modules.movement.application.dto;
 
 import com.example.account.core.enums.MovementTypeEnum;
-import jakarta.validation.constraints.Digits;
-import jakarta.validation.constraints.Min;
-import jakarta.validation.constraints.NotNull;
+import jakarta.validation.constraints.*;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import java.math.BigDecimal;
+
 @Data
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
-public class MovementRequest {
+public class MovementRequestDTO {
     @NotNull
-    private Long accountId;
+    private String accountNumber;
     @NotNull
-    private MovementTypeEnum type;
-    @NotNull
-    @Min(0)
     @Digits(integer = 9, fraction = 6)
-    private Double amount;
+    @DecimalMin(value = "-999999999", inclusive = false)
+    @DecimalMax(value = "999999999", inclusive = false)
+    private BigDecimal amount;
 }

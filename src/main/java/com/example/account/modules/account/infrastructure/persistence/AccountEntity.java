@@ -1,6 +1,6 @@
 package com.example.account.modules.account.infrastructure.persistence;
 
-import com.example.account.core.AccountTypeEnum;
+import com.example.account.core.enums.AccountTypeEnum;
 import com.example.account.modules.movement.infrastructure.persistence.MovementEntity;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
@@ -14,6 +14,7 @@ import java.util.List;
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
+@Table(name = "accounts")
 public class AccountEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -21,8 +22,7 @@ public class AccountEntity {
     private String number;
     @Enumerated(EnumType.STRING)
     private AccountTypeEnum type;
-    @Column(name = "initial_balance")
-    private BigDecimal initialBalance;
+    private BigDecimal balance;
     private boolean status;
 
     @JsonIgnore

@@ -1,9 +1,10 @@
 package com.example.account.modules.account.application.ports.out;
 
 import com.example.account.modules.account.domain.AccountModel;
+import org.springframework.data.domain.Page;
 
-import java.util.List;
 import java.util.Map;
+import java.util.Optional;
 
 public interface AccountRepository {
     AccountModel save(AccountModel accountModel);
@@ -12,7 +13,9 @@ public interface AccountRepository {
 
     AccountModel findById(Long id);
 
-    List<AccountModel> findAll(Map<String, Object> params);
+    Page<AccountModel> findAll(Map<String, Object> params);
 
     void deleteById(Long id);
+
+    Optional<AccountModel> findByNumber(String number);
 }

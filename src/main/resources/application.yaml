@@ -16,6 +16,6 @@ spring:
       ddl-auto: none
 logging:
   level:
-    root: DEBUG
+    root: INFO
 
 

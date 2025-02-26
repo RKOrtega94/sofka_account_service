@@ -17,7 +17,7 @@ public class CreateAccountRequestDTO {
     private AccountTypeEnum type;
     @NotNull
     @Digits(integer = 9, fraction = 6)
-    private Double balance;
+    private Double initialBalance;
     @Builder.Default
     private boolean status = true;
 }

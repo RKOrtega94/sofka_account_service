@@ -1,6 +1,6 @@
 package com.example.account.modules.movement.infrastructure.persistence;
 
-import com.example.account.core.MovementTypeEnum;
+import com.example.account.core.enums.MovementTypeEnum;
 import com.example.account.modules.account.infrastructure.persistence.AccountEntity;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
@@ -16,6 +16,7 @@ import java.time.Instant;
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
+@Table(name = "movements")
 public class MovementEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -29,4 +30,14 @@ public class MovementEntity {
     @ManyToOne
     @JoinColumn(name = "account_id")
     private AccountEntity account;
+
+    @PrePersist
+    public void prePersist() {
+        this.date = Instant.now();
+        if (this.amount.compareTo(BigDecimal.ZERO) > 0) {
+            this.type = MovementTypeEnum.INCOME;
+        } else {
+            this.type = MovementTypeEnum.EXPENSE;
+        }
+    }
 }
