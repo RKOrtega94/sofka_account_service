@@ -1,4 +1,4 @@
-package com.example.account.modules.account.application.dto;
+package com.example.account.modules.movement.application.dto;
 
 import com.example.account.core.MovementTypeEnum;
 import jakarta.validation.constraints.Digits;
