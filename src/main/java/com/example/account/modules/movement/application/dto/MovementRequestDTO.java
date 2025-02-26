@@ -1,6 +1,6 @@
 package com.example.account.modules.movement.application.dto;
 
-import com.example.account.core.MovementTypeEnum;
+import com.example.account.core.enums.MovementTypeEnum;
 import jakarta.validation.constraints.Digits;
 import jakarta.validation.constraints.Min;
 import jakarta.validation.constraints.NotNull;

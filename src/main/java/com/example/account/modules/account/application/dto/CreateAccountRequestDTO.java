@@ -1,9 +1,7 @@
 package com.example.account.modules.account.application.dto;
 
-import com.example.account.core.AccountTypeEnum;
+import com.example.account.core.enums.AccountTypeEnum;
 import jakarta.validation.constraints.Digits;
-import jakarta.validation.constraints.NotBlank;
-import jakarta.validation.constraints.NotEmpty;
 import jakarta.validation.constraints.NotNull;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -14,12 +12,12 @@ import lombok.NoArgsConstructor;
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
-public class AccountRequestDTO {
+public class CreateAccountRequestDTO {
     @NotNull
     private AccountTypeEnum type;
     @NotNull
     @Digits(integer = 9, fraction = 6)
-    private Double initialBalance;
+    private Double balance;
     @Builder.Default
     private boolean status = true;
 }
