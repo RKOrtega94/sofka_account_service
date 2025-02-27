@@ -1,4 +1,4 @@
-package com.example.account.modules.account.infrastructure.client;
+package com.example.account.core.clients;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;

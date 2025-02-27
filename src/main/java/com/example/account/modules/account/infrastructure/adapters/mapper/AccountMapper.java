@@ -18,6 +18,6 @@ public interface AccountMapper {
 
     @Mapping(target = "number", ignore = true)
     @Mapping(target = "movements", ignore = true)
-    @Mapping(target = "balance", ignore = true)
+    @Mapping(target = "initialBalance", ignore = true)
     void update(AccountModel model, @MappingTarget AccountEntity entity);
 }

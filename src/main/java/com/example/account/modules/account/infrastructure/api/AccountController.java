@@ -1,6 +1,7 @@
 package com.example.account.modules.account.infrastructure.api;
 
 import com.example.account.core.utils.BaseResponse;
+import com.example.account.modules.account.application.dto.AccountResponseDTO;
 import com.example.account.modules.account.application.dto.CreateAccountRequestDTO;
 import com.example.account.modules.account.application.dto.UpdateAccountRequestDTO;
 import com.example.account.modules.account.application.ports.in.*;
@@ -27,14 +28,14 @@ public class AccountController {
 
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
-    ResponseEntity<BaseResponse<AccountModel>> createAccount(@RequestBody @Valid CreateAccountRequestDTO dto) {
-        return ResponseEntity.created(URI.create("/api/cuentas")).body(BaseResponse.<AccountModel>builder().message("Account created successfully").data(createAccountUseCase.create(dto)).build());
+    ResponseEntity<BaseResponse<AccountResponseDTO>> createAccount(@RequestBody @Valid CreateAccountRequestDTO dto) {
+        return ResponseEntity.created(URI.create("/api/cuentas")).body(BaseResponse.<AccountResponseDTO>builder().message("Account created successfully").data(createAccountUseCase.create(dto)).build());
     }
 
     @PutMapping("/{id}")
     @ResponseStatus(HttpStatus.OK)
-    ResponseEntity<BaseResponse<AccountModel>> updateAccount(@PathVariable Long id, @RequestBody @Valid UpdateAccountRequestDTO dto) {
-        return ResponseEntity.ok().body(BaseResponse.<AccountModel>builder().message("Account updated successfully").data(updateAccountUseCase.update(dto, id)).build());
+    ResponseEntity<BaseResponse<AccountResponseDTO>> updateAccount(@PathVariable Long id, @RequestBody @Valid UpdateAccountRequestDTO dto) {
+        return ResponseEntity.ok().body(BaseResponse.<AccountResponseDTO>builder().message("Account updated successfully").data(updateAccountUseCase.update(dto, id)).build());
     }
 
     @DeleteMapping("/{id}")
@@ -52,7 +53,7 @@ public class AccountController {
 
     @GetMapping
     @ResponseStatus(HttpStatus.OK)
-    ResponseEntity<BaseResponse<Page<AccountModel>>> getAccounts(Map<String, Object> params) {
-        return ResponseEntity.ok().body(BaseResponse.<Page<AccountModel>>builder().message("Accounts retrieved successfully").data(retrieveAccountsUseCase.retrieve(params)).build());
+    ResponseEntity<BaseResponse<Page<AccountResponseDTO>>> getAccounts(Map<String, Object> params) {
+        return ResponseEntity.ok().body(BaseResponse.<Page<AccountResponseDTO>>builder().message("Accounts retrieved successfully").data(retrieveAccountsUseCase.retrieve(params)).build());
     }
 }

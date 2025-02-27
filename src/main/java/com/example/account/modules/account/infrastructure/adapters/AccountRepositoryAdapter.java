@@ -30,11 +30,12 @@ public class AccountRepositoryAdapter implements AccountRepository {
 
     @Override
     public AccountModel update(AccountModel accountModel, Long id) {
-        AccountEntity entity = jpa.findById(id).orElseThrow(EntityNotFoundException::new);
+       /* AccountEntity entity = jpa.findById(id).orElseThrow(EntityNotFoundException::new);
         mapper.update(accountModel, entity);
         entity.setId(id);
-        if (accountModel.getBalance() != null) entity.setBalance(accountModel.getBalance());
-        return mapper.toModel(jpa.save(entity));
+        if (accountModel.getInitialBalance() != null) entity.setBalance(accountModel.getBalance());
+        return mapper.toModel(jpa.save(entity));*/
+        return null;
     }
 
     @Override
