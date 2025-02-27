@@ -8,13 +8,6 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-@Data
-@Builder
-@NoArgsConstructor
-@AllArgsConstructor
-public class UpdateAccountRequestDTO {
-    @NotNull
-    private AccountTypeEnum type;
-    @Builder.Default
-    private boolean status = true;
+public record UpdateAccountRequestDTO(@NotNull AccountTypeEnum type, boolean status) {
+
 }

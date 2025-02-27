@@ -14,6 +14,7 @@ public class AccountModel {
     private Long id;
     private String number;
     private AccountTypeEnum type;
-    private BigDecimal balance;
+    private BigDecimal initialBalance;
     private boolean status;
+    private Long clientId;
 }

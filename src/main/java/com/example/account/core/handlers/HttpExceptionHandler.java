@@ -1,5 +1,10 @@
 package com.example.account.core.handlers;
 
+import java.util.List;
+import java.util.Map;
+import java.util.stream.Collectors;
+
+import org.springframework.context.MessageSourceResolvable;
 import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.dao.InvalidDataAccessApiUsageException;
 import org.springframework.dao.InvalidDataAccessResourceUsageException;
@@ -8,15 +13,15 @@ import org.springframework.http.converter.HttpMessageNotReadableException;
 import org.springframework.orm.jpa.JpaSystemException;
 import org.springframework.validation.FieldError;
 import org.springframework.web.bind.MethodArgumentNotValidException;
+import org.springframework.web.bind.MissingServletRequestParameterException;
+import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.ResponseStatus;
-import org.springframework.web.bind.annotation.RestControllerAdvice;
+import org.springframework.web.method.annotation.HandlerMethodValidationException;
 
-import java.util.Map;
-import java.util.stream.Collectors;
-
-@RestControllerAdvice
+@ControllerAdvice
 public class HttpExceptionHandler {
+
     @ExceptionHandler(InvalidDataAccessApiUsageException.class)
     @ResponseStatus(value = HttpStatus.BAD_REQUEST)
     public String handleInvalidDataAccessApiUsageException(InvalidDataAccessApiUsageException e) {
@@ -60,6 +65,18 @@ public class HttpExceptionHandler {
     @ResponseStatus(HttpStatus.BAD_REQUEST)
     public Map<String, String> handleIllegalArgumentException(IllegalArgumentException e) {
         return Map.of("error", "Illegal argument: " + getRootCauseMessage(e));
+    }
+
+    @ExceptionHandler(MissingServletRequestParameterException.class)
+    @ResponseStatus(HttpStatus.BAD_REQUEST)
+    public Map<String, String> handleMissingServletRequestParameterException(MissingServletRequestParameterException e) {
+        return Map.of("error", "Missing request parameter: " + getRootCauseMessage(e));
+    }
+
+    @ExceptionHandler(HandlerMethodValidationException.class)
+    @ResponseStatus(HttpStatus.BAD_REQUEST)
+    public List<String> handleHandlerMethodValidationException(HandlerMethodValidationException e) {
+        return e.getParameterValidationResults().stream().flatMap(result -> result.getResolvableErrors().stream().map(MessageSourceResolvable::getDefaultMessage)).collect(Collectors.toList());
     }
 
     private String getRootCauseMessage(Throwable e) {

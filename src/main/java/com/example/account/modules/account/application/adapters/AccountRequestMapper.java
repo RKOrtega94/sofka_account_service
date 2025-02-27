@@ -1,5 +1,6 @@
 package com.example.account.modules.account.application.adapters;
 
+import com.example.account.modules.account.application.dto.AccountResponseDTO;
 import com.example.account.modules.account.application.dto.CreateAccountRequestDTO;
 import com.example.account.modules.account.application.dto.UpdateAccountRequestDTO;
 import com.example.account.modules.account.domain.AccountModel;
@@ -13,11 +14,15 @@ public interface AccountRequestMapper {
 
     @Mapping(target = "id", ignore = true)
     @Mapping(target = "number", ignore = true)
-    @Mapping(target = "balance", source = "initialBalance")
-    AccountModel toAccountModel(CreateAccountRequestDTO dto);
+    AccountModel toModel(CreateAccountRequestDTO dto);
 
     @Mapping(target = "id", ignore = true)
     @Mapping(target = "number", ignore = true)
-    @Mapping(target = "balance", ignore = true)
-    AccountModel toAccountModel(UpdateAccountRequestDTO dto);
+    @Mapping(target = "initialBalance", ignore = true)
+    @Mapping(target = "clientId", ignore = true)
+    AccountModel toModel(UpdateAccountRequestDTO dto);
+
+    @Mapping(target = "accountNumber", source = "number")
+    @Mapping(target = "client", ignore = true)
+    AccountResponseDTO toResponse(AccountModel model);
 }

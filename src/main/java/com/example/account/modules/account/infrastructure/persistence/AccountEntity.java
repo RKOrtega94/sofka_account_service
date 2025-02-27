@@ -22,8 +22,11 @@ public class AccountEntity {
     private String number;
     @Enumerated(EnumType.STRING)
     private AccountTypeEnum type;
-    private BigDecimal balance;
+    @Column(name = "balance")
+    private BigDecimal initialBalance;
     private boolean status;
+    @Column(name = "client_id")
+    private Long clientId;
 
     @JsonIgnore
     @OneToMany(mappedBy = "account", cascade = CascadeType.ALL, fetch = FetchType.LAZY)

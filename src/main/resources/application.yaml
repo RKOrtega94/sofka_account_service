@@ -1,5 +1,5 @@
 server:
-  port: 8082
+  port: ${SERVER_PORT:8082}
 
 spring:
   application:
@@ -18,4 +18,5 @@ logging:
   level:
     root: INFO
 
-
+clients:
+  user: http://localhost:8081/api/clientes
